@@ -1,9 +1,9 @@
-import { useEffect, useRef, useState } from 'react'
+import { useState } from 'react'
 import Content from './components/Content'
 import Sidebar from './components/Sidebar'
 import { samples } from './data/sample'
-import { generateUniqueId } from './utils/IdUtils'
 import { type Project } from './types/index'
+import { generateUniqueId } from './utils/IdUtils'
 
 function App() {
   // プロジェクト追加・削除用
@@ -12,16 +12,6 @@ function App() {
 
   // プロジェクト編集(タスク追加・削除)用
   const [projectId, setProjectId] = useState(0)
-
-  const prevProjectIdRef = useRef<number>(0)
-
-  useEffect(() => {
-    if (prevProjectIdRef.current !== projectId && projectId !== 0) {
-      // プロジェクトが切り替わった時の処理
-      console.log(`Project changed from ${prevProjectIdRef.current} to ${projectId}`)
-    }
-    prevProjectIdRef.current = projectId
-  }, [projectId])
 
   const handleOpenForm = () => {
     setIsFormOpen(true)
