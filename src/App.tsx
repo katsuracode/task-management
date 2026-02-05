@@ -1,21 +1,9 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import Content from './components/Content'
 import Sidebar from './components/Sidebar'
 import { samples } from './data/sample'
 import { generateUniqueId } from './utils/IdUtils'
-
-export type Task = {
-  id: number
-  description: string
-}
-
-export type Project = {
-  id: number
-  title: string
-  description: string
-  date: string
-  taskList: Array<Task>
-}
+import { type Project } from './types/index'
 
 function App() {
   // プロジェクト追加・削除用
@@ -24,6 +12,16 @@ function App() {
 
   // プロジェクト編集(タスク追加・削除)用
   const [projectId, setProjectId] = useState(0)
+
+  const prevProjectIdRef = useRef<number>(0)
+
+  useEffect(() => {
+    if (prevProjectIdRef.current !== projectId && projectId !== 0) {
+      // プロジェクトが切り替わった時の処理
+      console.log(`Project changed from ${prevProjectIdRef.current} to ${projectId}`)
+    }
+    prevProjectIdRef.current = projectId
+  }, [projectId])
 
   const handleOpenForm = () => {
     setIsFormOpen(true)
@@ -56,7 +54,7 @@ function App() {
     setProjectList((prevList) => {
       return prevList.map((project) => {
         if (project.id === projectId) {
-          return { ...project, taskList: [...project.taskList, { id: taskId, description }] }
+          return { ...project, taskList: [{ id: taskId, description }, ...project.taskList] }
         } else {
           return project
         }

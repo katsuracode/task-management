@@ -1,4 +1,4 @@
-import type { Project } from '../App'
+import type { Project } from '../types/index'
 import NoProject from './sub/NoProject'
 import ProjectForm from './sub/ProjectForm'
 import ProjectView from './sub/ProjectView'
