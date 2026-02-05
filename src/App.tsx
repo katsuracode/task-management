@@ -24,7 +24,6 @@ function App() {
 
   // プロジェクト編集(タスク追加・削除)用
   const [projectId, setProjectId] = useState(0)
-  const [isProjectEdit, setIsProjectEdit] = useState(false)
 
   const handleOpenForm = () => {
     setIsFormOpen(true)
@@ -32,7 +31,7 @@ function App() {
 
   const handleCloseForm = () => {
     setIsFormOpen(false)
-    setIsProjectEdit(false)
+    setProjectId(0)
   }
 
   const handleAddProject = (project: Project) => {
@@ -43,12 +42,11 @@ function App() {
 
   const handleDeleteProject = (id: number) => {
     setProjectList((prevList) => prevList.filter((project) => project.id !== id))
-    setIsProjectEdit(false)
+    setProjectId(0)
   }
 
   const handleSeletectProject = (id: number) => {
     setProjectId(id)
-    setIsProjectEdit(true)
     setIsFormOpen(false)
   }
 
@@ -95,7 +93,6 @@ function App() {
           onCloseForm={handleCloseForm}
           onAddProject={handleAddProject}
           onDeleteProject={handleDeleteProject}
-          isProjectEdit={isProjectEdit}
           projectList={projectList}
           projectId={projectId}
           onAddTask={handleAddTask}
