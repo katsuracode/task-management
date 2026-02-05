@@ -8,11 +8,11 @@ type SideBarProps = {
 
 const Sidebar = ({ onOpenForm, onSelectProject, projectList }: SideBarProps) => {
   return (
-    <aside className="my-1 h-screen w-1/3 rounded-sm bg-stone-900 px-8 text-stone-300">
+    <aside className="my-1 h-screen w-1/3 rounded-sm bg-stone-900 px-8 text-stone-300 hover:bg-stone-800">
       <h2 className="mt-20 mb-8 text-4xl font-extrabold text-stone-300">Your Projects</h2>
 
       <p
-        className="my-8 inline-block rounded-xl bg-stone-600 px-6 py-4 text-xl"
+        className="my-8 inline-block rounded-xl bg-stone-600 px-6 py-4 text-xl transition-all duration-200 hover:scale-105 hover:bg-stone-500 active:scale-95"
         onClick={onOpenForm}
       >
         + Add Project

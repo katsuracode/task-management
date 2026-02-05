@@ -37,7 +37,6 @@ function App() {
   const handleAddProject = (project: Project) => {
     setProjectList((prevList) => [project, ...prevList])
     setIsFormOpen(false)
-    console.table(projectList)
   }
 
   const handleDeleteProject = (id: number) => {

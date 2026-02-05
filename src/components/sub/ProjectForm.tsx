@@ -23,13 +23,13 @@ const ProjectForm = ({ onCloseForm, onAddProject }: ProjectFormProps) => {
     <form className="m-2 flex w-2/4 flex-col pt-32" action={handleSaveProject}>
       <div className="flex justify-end gap-4">
         <button
-          className="px-8 py-2 text-xl font-semibold text-stone-900"
+          className="px-8 py-2 text-xl font-semibold text-stone-900 transition-all duration-200 hover:scale-105 active:scale-95"
           onClick={handleCancelAddProject}
         >
           Cancel
         </button>
         <button
-          className="rounded-xl bg-stone-900 px-8 py-2 text-xl font-semibold text-white"
+          className="rounded-xl bg-stone-900 px-8 py-2 text-xl font-semibold text-white transition-all duration-200 hover:scale-105 hover:bg-stone-700 active:scale-95"
           type="submit"
         >
           Save
@@ -41,21 +41,25 @@ const ProjectForm = ({ onCloseForm, onAddProject }: ProjectFormProps) => {
           <label htmlFor="title" className="text-xl font-semibold text-stone-700 uppercase">
             title
           </label>
-          <input className="bg-stone-200 p-2" type="text" id="title" name="title" />
+          <input className="rounded-sm bg-stone-200 p-2" type="text" id="title" name="title" />
         </div>
 
         <div className="my-2 flex flex-col gap-2">
           <label htmlFor="description" className="text-xl font-semibold text-stone-700 uppercase">
             description
           </label>
-          <textarea className="bg-stone-200 p-2" id="description" name="description"></textarea>
+          <textarea
+            className="rounded-sm bg-stone-200 p-2"
+            id="description"
+            name="description"
+          ></textarea>
         </div>
 
         <div className="my-2 flex flex-col gap-2">
           <label htmlFor="description" className="text-xl font-semibold text-stone-700 uppercase">
             due date
           </label>
-          <input type="date" className="bg-stone-200 p-2" id="date" name="date" />
+          <input type="date" className="rounded-sm bg-stone-200 p-2" id="date" name="date" />
         </div>
       </div>
     </form>

@@ -12,10 +12,10 @@ const NoProject = ({ onOpenForm }: NoProjectProps) => {
       <p className="text-xl text-stone-500">Select a project or get started with a new one</p>
 
       <p
-        className="my-8 inline-block rounded-xl bg-stone-600 px-6 py-4 text-xl text-stone-400"
+        className="my-8 inline-block rounded-xl bg-stone-600 px-6 py-4 text-xl text-stone-300 transition-all duration-200 hover:scale-105 hover:bg-stone-500 active:scale-95"
         onClick={onOpenForm}
       >
-        + Add Project
+        Create New Project
       </p>
     </div>
   )
