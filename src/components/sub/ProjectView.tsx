@@ -1,22 +1,33 @@
 import type { Project } from '../../App'
 
 type ProjectViewProps = {
-  project: Project
+  projectList: Project[]
+  projectId: number
   onDeleteProject: (id: number) => void
-  onAddTask: (description: string) => void
-  onDeleteTask: (id: number) => void
+  onAddTask: (projectId: number, description: string) => void
+  onDeleteTask: (projectId: number, taskId: number) => void
 }
 
-const ProjectView = ({ project, onDeleteProject, onAddTask, onDeleteTask }: ProjectViewProps) => {
+const ProjectView = ({
+  projectList,
+  projectId,
+  onDeleteProject,
+  onAddTask,
+  onDeleteTask,
+}: ProjectViewProps) => {
   const handleAddTask = async (formData: FormData) => {
     const description = formData.get('task') as string
 
-    onAddTask(description)
+    onAddTask(projectId, description)
   }
 
-  const handleDeleteTask = (id: number) => {
-    onDeleteTask(id)
+  const handleDeleteTask = (taskId: number) => {
+    onDeleteTask(projectId, taskId)
   }
+
+  const project = projectList.filter((project) => project.id === projectId)[0]
+
+  if (!project) return
 
   return (
     <div className="my-1 flex h-screen w-2/4 flex-col pt-16">
@@ -24,7 +35,7 @@ const ProjectView = ({ project, onDeleteProject, onAddTask, onDeleteTask }: Proj
         <h3 className="flex items-center text-3xl font-bold text-stone-700">{project.title}</h3>
         <button
           className="text-xl font-semibold text-stone-900"
-          onClick={() => onDeleteProject(project.id)}
+          onClick={() => onDeleteProject(projectId)}
         >
           Delete
         </button>

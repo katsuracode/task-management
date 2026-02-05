@@ -10,9 +10,10 @@ type ContentProps = {
   onAddProject: (project: Project) => void
   onDeleteProject: (id: number) => void
   isProjectEdit: boolean
-  project: Project
-  onAddTask: (description: string) => void
-  onDeleteTask: (id: number) => void
+  projectList: Project[]
+  projectId: number
+  onAddTask: (projectId: number, description: string) => void
+  onDeleteTask: (projectId: number, taskId: number) => void
 }
 
 const Content = ({
@@ -22,7 +23,8 @@ const Content = ({
   onAddProject,
   onDeleteProject,
   isProjectEdit,
-  project,
+  projectList,
+  projectId,
   onAddTask,
   onDeleteTask,
 }: ContentProps) => {
@@ -32,7 +34,8 @@ const Content = ({
         <ProjectForm onCloseForm={onCloseForm} onAddProject={onAddProject} />
       ) : isProjectEdit ? (
         <ProjectView
-          project={project}
+          projectList={projectList}
+          projectId={projectId}
           onDeleteProject={onDeleteProject}
           onAddTask={onAddTask}
           onDeleteTask={onDeleteTask}

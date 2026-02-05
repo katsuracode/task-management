@@ -7,7 +7,7 @@ type NoProjectProps = {
 const NoProject = ({ onOpenForm }: NoProjectProps) => {
   return (
     <div className="m-2 flex w-2/4 flex-col items-center pt-32">
-      <img src={logo} alt="Logo" className="h-24 w-24" />
+      <img src={logo} alt="Logo" className="h-24 w-24 object-contain" />
       <h2 className="mt-20 mb-8 text-2xl font-extrabold text-stone-700">No Project Selected</h2>
       <p className="text-xl text-stone-500">Select a project or get started with a new one</p>
 

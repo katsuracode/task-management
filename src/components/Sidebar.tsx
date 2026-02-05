@@ -22,7 +22,7 @@ const Sidebar = ({ onOpenForm, onSelectProject, projectList }: SideBarProps) => 
         {projectList.map((project) => (
           <li
             key={project.id}
-            className="my-2 text-xl font-semibold"
+            className="my-4 text-xl font-semibold"
             onClick={() => onSelectProject(project.id)}
           >
             {project.title}

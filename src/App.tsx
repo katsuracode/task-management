@@ -23,7 +23,7 @@ function App() {
   const [isFormOpen, setIsFormOpen] = useState(false)
 
   // プロジェクト編集(タスク追加・削除)用
-  const [project, setProject] = useState<Project>(null)
+  const [projectId, setProjectId] = useState(0)
   const [isProjectEdit, setIsProjectEdit] = useState(false)
 
   const handleOpenForm = () => {
@@ -32,6 +32,7 @@ function App() {
 
   const handleCloseForm = () => {
     setIsFormOpen(false)
+    setIsProjectEdit(false)
   }
 
   const handleAddProject = (project: Project) => {
@@ -46,46 +47,43 @@ function App() {
   }
 
   const handleSeletectProject = (id: number) => {
-    const selectedProject = projectList.find((project) => project.id === id)
-
-    if (selectedProject) {
-      setProject(selectedProject)
-      setIsProjectEdit(true)
-      setIsFormOpen(false)
-    }
+    setProjectId(id)
+    setIsProjectEdit(true)
+    setIsFormOpen(false)
   }
 
-  const handleAddTask = (description: string) => {
+  const handleAddTask = (projectId: number, description: string) => {
+    // 指定されたプロジェクトが探し、タスクを追加する
     const taskId = generateUniqueId()
+    const newProject = projectList.filter((project) => project.id === projectId)[0]
 
-    // タスクを追加する
-    if (project) {
-      console.log(description)
-      const newProject = {
-        ...project,
-        taskList: [{ id: taskId, description }, ...project.taskList],
-      }
-
-      setProject(newProject)
-      replaceProject(newProject)
+    if (newProject) {
+      newProject.taskList.push({ id: taskId, description })
     }
-  }
 
-  const handleDeleteTask = (id: number) => {
-    // 指定されたタスクIDのタスクを削除する
-    if (project) {
-      const newProject = { ...project, taskList: project.taskList.filter((task) => task.id !== id) }
-
-      setProject(newProject)
-      replaceProject(newProject)
-    }
-  }
-
-  const replaceProject = (newProject: Project) => {
     setProjectList((prevList) => {
       return prevList.map((project) => {
-        if (project.id === newProject.id) {
-          return { ...newProject, taskList: [...newProject.taskList] }
+        if (project.id === projectId) {
+          return { ...project, taskList: [...newProject.taskList] }
+        } else {
+          return project
+        }
+      })
+    })
+  }
+
+  const handleDeleteTask = (projectId: number, taskId: number) => {
+    // 指定されたプロジェクトが探し、指定されたタスクIDのタスクを削除する
+    const newProject = projectList.filter((project) => project.id === projectId)[0]
+
+    if (newProject) {
+      newProject.taskList = [...newProject.taskList.filter((task) => task.id !== taskId)]
+    }
+
+    setProjectList((prevList) => {
+      return prevList.map((project) => {
+        if (project.id === projectId) {
+          return newProject
         } else {
           return project
         }
@@ -108,7 +106,8 @@ function App() {
           onAddProject={handleAddProject}
           onDeleteProject={handleDeleteProject}
           isProjectEdit={isProjectEdit}
-          project={project}
+          projectList={projectList}
+          projectId={projectId}
           onAddTask={handleAddTask}
           onDeleteTask={handleDeleteTask}
         />
