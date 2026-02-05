@@ -1,4 +1,3 @@
-import { useEffect, useRef } from 'react'
 import type { Project } from '../types/index'
 
 type SideBarProps = {
@@ -8,15 +7,6 @@ type SideBarProps = {
 }
 
 const Sidebar = ({ onOpenForm, onSelectProject, projectList }: SideBarProps) => {
-  const selectedProjectRef = useRef<HTMLLIElement>(null)
-
-  useEffect(() => {
-    selectedProjectRef.current?.scrollIntoView({
-      behavior: 'smooth',
-      block: 'nearest',
-    })
-  }, [projectList])
-
   return (
     <aside className="my-1 h-screen w-1/3 rounded-sm bg-stone-900 px-8 text-stone-300 hover:bg-stone-800">
       <h2 className="mt-20 mb-8 text-4xl font-extrabold text-stone-300">Your Projects</h2>
