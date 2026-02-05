@@ -25,7 +25,7 @@ const ProjectView = ({
     onDeleteTask(projectId, taskId)
   }
 
-  const project = projectList.filter((project) => project.id === projectId)[0]
+  const project = projectList.find((project) => project.id === projectId)
 
   if (!project) return
 

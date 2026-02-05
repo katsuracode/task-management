@@ -55,16 +55,11 @@ function App() {
   const handleAddTask = (projectId: number, description: string) => {
     // 指定されたプロジェクトが探し、タスクを追加する
     const taskId = generateUniqueId()
-    const newProject = projectList.filter((project) => project.id === projectId)[0]
-
-    if (newProject) {
-      newProject.taskList.push({ id: taskId, description })
-    }
 
     setProjectList((prevList) => {
       return prevList.map((project) => {
         if (project.id === projectId) {
-          return { ...project, taskList: [...newProject.taskList] }
+          return { ...project, taskList: [...project.taskList, { id: taskId, description }] }
         } else {
           return project
         }
@@ -74,16 +69,11 @@ function App() {
 
   const handleDeleteTask = (projectId: number, taskId: number) => {
     // 指定されたプロジェクトが探し、指定されたタスクIDのタスクを削除する
-    const newProject = projectList.filter((project) => project.id === projectId)[0]
-
-    if (newProject) {
-      newProject.taskList = [...newProject.taskList.filter((task) => task.id !== taskId)]
-    }
 
     setProjectList((prevList) => {
       return prevList.map((project) => {
         if (project.id === projectId) {
-          return newProject
+          return { ...project, taskList: project.taskList.filter((task) => task.id !== taskId) }
         } else {
           return project
         }
